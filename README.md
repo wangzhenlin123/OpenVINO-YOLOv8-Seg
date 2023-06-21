@@ -1,29 +1,52 @@
 # OpenVINO-YOLOv8-Seg
+
 OpenVINO™ 实现YOLOv8-Seg实例分割模型推理
+
 开发环境是 Windows + Visual Studio Community 2022。
+
 本文的码云代码仓：
+
 git clone https://gitee.com/ppov-nuc/yolov8_openvino_cpp.git
+
 02. 导出 YOLOv8-Seg OpenVINO™ IR 模型
+
 YOLOv8 是 Ultralytics 公司基于 YOLO 框架，发布的一款面向物体检测与跟踪、实例分割、图像分类和姿态估计任务的 SOTA 模型工具套件。
+
 首先用命令 ：
+
 pip install -r requirements.txt
+
 安装  ultralytics 和 openvino-dev 。
+
 然后使用命令：
+
 yolo export model=yolov8n-seg.pt format=openvino half=True
+
 导出 FP16 精度的 OpenVINO™ IR 模型，如下图所示。
+
 接着使用命令：
+
 benchmark_app -m yolov8n-seg.xml -d GPU.1
+
 03. 使用 OpenVINO™ C++ API 
-编写 YOLOv8-Seg 实例分割模型推理程序
-使用 OpenVINO™ C++ API 编写 YOLOv8-Seg 实例分割模型推理程序主要有5个典型步骤：
+
+编写 YOLOv8-Seg 实例分割模型推理程序使用 OpenVINO™ C++ API 编写 YOLOv8-Seg 实例分割模型推理程序主要有5个典型步骤：
+
 1采集图像&图像解码
+
 2图像数据预处理
+
 3AI 推理计算(基于 OpenVINO™ C++ API )
+
 4对推理结果进行后处理
+
 5将处理后的结果可视化
+
 YOLOv8-Seg 实例分割模型推理程序的图像数据预处理和AI推理计算的实现方式跟 YOLOv8 目标检测模型推理程序的实现方式几乎一模一样，可以直接复用。
+
 3.1 图像数据预处理
 使用 Netron 打开 yolov8n-seg.onnx 
+
 ![image](https://github.com/wangzhenlin123/OpenVINO-YOLOv8-Seg/assets/51401216/32c131ca-001f-4619-b680-a1dc3b274e5a)
 
 输入节点的名字：“ images ”；数据：float32[1,3,640,640]
