@@ -24,6 +24,9 @@ yolo export model=yolov8n-seg.pt format=openvino half=True
 
 导出 FP16 精度的 OpenVINO™ IR 模型，如下图所示。
 
+![image](https://github.com/wangzhenlin123/OpenVINO-YOLOv8-Seg/assets/51401216/d2c9ef54-b8a4-41ba-9f39-ac5b0df45300)
+
+
 接着使用命令：
 
 benchmark_app -m yolov8n-seg.xml -d GPU.1
